@@ -1,4 +1,7 @@
 library(tidyverse)
+library(magrittr)
+library(dplyr)
+library(data.table)
 
 ### Assignment 1 ###
 
@@ -19,6 +22,20 @@ vec_2
 ## Q2 
 sample_space <- expand_grid(die_1 = vec_1, die_2 = vec_2,)
 sample_space 
+
+
+## Q3
+# sample_space[, probability := 1/36]
+
+probability <- rep(1/36, nrow(sample_space))
+probability
+# calculate probability of those 36 value 
+sample_space <- cbind(sample_space, probability = probability)
+sample_space
+# add probability as a new column using to sample_space 
+
+
+## Q4 
 
 
 
