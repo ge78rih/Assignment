@@ -54,13 +54,47 @@ sample_space %>% filter(sum_outcomes >= 4 & sum_outcomes <= 9) %>% nrow()/nrow(s
 
 ## Q7
 sample_space %>%
-  group_by(sum_outcomes) %>%
-  summarise(probability = sum(probability)) %>%
-  arrange(desc(probability)) %>%
-  head(1)
+  group_by(sum_outcomes) %>% # first group outcomes data 
+  summarise(probability = sum(probability)) %>% #calculate total peobabilty of each sum
+  arrange(desc(probability)) %>% # ordered them
+  head(1) # show the most probable value 
 
 
 ## Q8
+probabilities <- c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
+num_delays <- c(0:10)
+prob_distributions <- data.frame(Probability = probabilities)
+for (p in probabilities) {
+  prob_distribution <- dbinom(num_delays, size = 10, prob = p)
+  prob_distributions <- cbind(prob_distributions, prob_distribution)
+}
+
+
+
+## Q9
+sim_rides <- function(N, p) {
+  sample(c("L", "O"), size = N, replace = TRUE, prob = c(p, 1 - p))
+}
+
+set.seed(1237)
+obs <- sim_rides(10, 0.3)
+
+likelihoods <- sapply(probabilities, function(p) {
+  num_delays_observed <- sum(obs == "L")
+  likelihood <- dbinom(num_delays_observed, size = 10, prob = p)
+  return(likelihood)
+})
+
+
+
+## Q10
+prior <- c(0.000, 0.004, 0.041, 0.123, 0.209, 0.246, 0.209, 0.123, 0.041, 0.004, 0.000)
+
+posterior <- likelihoods * prior / sum(likelihoods * prior)
+
+
+
+
 
             
             
