@@ -36,7 +36,25 @@ sample_space
 
 
 ## Q4 
+sample_space <- sample_space %>% mutate(sum_outcomes = die_1 + die_2)
+sample_space[, -5]
+sample_space
+# mutate function to add new variable sum of two outcomes  
 
+
+## Q5
+sample_space %>% filter(die_1 == 3) %>% filter(sum_outcomes >= 7) %>% nrow()/ nrow(sample_space)
+# [1] 0.08333333
+
+
+## Q6 
+sample_space %>% filter(sum >= 4 & sum <= 9) %>% nrow()/nrow(sample_space)
+# [1] 0.75
+
+
+# Q7
+sample_space %>% group_by(sum) %>% summarise("probability" = n()/ nrow(sample_space)) 
+%>% arrange(desc(probability)
 
 
 
