@@ -48,14 +48,22 @@ sample_space %>% filter(die_1 == 3) %>% filter(sum_outcomes >= 7) %>% nrow()/ nr
 
 
 ## Q6 
-sample_space %>% filter(sum >= 4 & sum <= 9) %>% nrow()/nrow(sample_space)
+sample_space %>% filter(sum_outcomes >= 4 & sum_outcomes <= 9) %>% nrow()/nrow(sample_space)
 # [1] 0.75
 
 
-# Q7
-sample_space %>% group_by(sum) %>% summarise("probability" = n()/ nrow(sample_space)) 
-%>% arrange(desc(probability)
+## Q7
+sample_space %>%
+  group_by(sum_outcomes) %>%
+  summarise(probability = sum(probability)) %>%
+  arrange(desc(probability)) %>%
+  head(1)
 
+
+## Q8
+
+            
+            
 
 
 
