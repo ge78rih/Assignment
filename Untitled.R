@@ -62,12 +62,16 @@ sample_space %>%
 
 ## Q8
 probabilities <- c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1)
-num_delays <- c(0:10)
+num_delays <- 0:10
 prob_distributions <- data.frame(Probability = probabilities)
 for (p in probabilities) {
   prob_distribution <- dbinom(num_delays, size = 10, prob = p)
   prob_distributions <- cbind(prob_distributions, prob_distribution)
 }
+prob_distributions
+# loop through each probability 
+# dbinorm is used to compute numbers of possible delays 
+# lastly, store each possibility in a the pro_distributions column 
 
 
 
@@ -84,6 +88,8 @@ likelihoods <- sapply(probabilities, function(p) {
   likelihood <- dbinom(num_delays_observed, size = 10, prob = p)
   return(likelihood)
 })
+# sapply iterates through each probability of delay
+# compute likelihood of the observed data 
 
 
 
@@ -91,7 +97,8 @@ likelihoods <- sapply(probabilities, function(p) {
 prior <- c(0.000, 0.004, 0.041, 0.123, 0.209, 0.246, 0.209, 0.123, 0.041, 0.004, 0.000)
 
 posterior <- likelihoods * prior / sum(likelihoods * prior)
-
+# Bayes' rule: multiply the likelihood by the prior probability 
+# divide by the sum of likelihood multiply by prior again 
 
 
 
